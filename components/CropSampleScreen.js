@@ -20,6 +20,8 @@ const CropSampleScreen = () => {
   const [sound, setSound] = useState();
 
   const onHandleChange = ({ leftPosition, rightPosition }) => {
+    if (leftPosition < 0 || rightPosition < 0) return;
+    
     setTrimmerLeftHandlePosition(leftPosition);
     setTrimmerRightHandlePosition(rightPosition);
 
