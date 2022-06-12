@@ -15,6 +15,7 @@ const LibrarySlice = createSlice({
           id: uuid(),
           title: action.payload.title,
           uri: action.payload.uri,
+          duration: action.payload.duration,
           type: action.payload.type
       }
         

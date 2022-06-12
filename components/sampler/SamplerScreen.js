@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
-import { clearPadSample, PadSelectorById, samplerSelector } from "./SamplerSlice";
+import { clearSample, PadSelectorById, samplerSelector } from "./SamplerSlice";
 import Pad from "./Pad";
 
 const SamplerScreen = () => {
@@ -18,7 +18,7 @@ const SamplerScreen = () => {
   const openModal = (padId) => {
     setModalVisible(true);
     setCurrentPadId(padId);
-  }
+  };
 
   const closeModal = () => setModalVisible(false);
 
@@ -28,8 +28,7 @@ const SamplerScreen = () => {
         return (
           <Pad
             key={ item.id }
-            sampleId={ item.sampleId }
-            color={ item.color }
+            padData={ item }
             handleLongPress={() => openModal(item.id)}
           />
         );
@@ -72,13 +71,19 @@ const SamplerScreen = () => {
                   {(currentPad.sampleId) ? (
                     <>
                       <TouchableOpacity
-                        style={styles.modalButton}
-                        onPress={() => dispatch(clearPadSample({ id: currentPad.id }))}
+                        style={ styles.modalButton }
+                        onPress={() => {
+                          navigation.navigate("Crop Sample", { pad: currentPad, sampleId: currentPad.sampleId });
+                          closeModal();
+                        }}
                       >
-                        <Text style={styles.modalButtonText}>Clear Sample</Text>
+                        <Text style={ styles.modalButtonText }>Crop sample</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity style={styles.modalButton}>
-                        <Text style={styles.modalButtonText}>Crop</Text>
+                      <TouchableOpacity
+                        style={ styles.modalButton }
+                        onPress={() => dispatch(clearSample({ id: currentPad.id }))}
+                      >
+                        <Text style={ styles.modalButtonText }>Clear pad</Text>
                       </TouchableOpacity>
                     </>
                     ) : null
@@ -86,7 +91,7 @@ const SamplerScreen = () => {
                   <TouchableOpacity
                     style={ styles.modalButton }
                     onPress={() => {
-                      navigation.navigate("Pad coloring", currentPad);
+                      navigation.navigate("Color Pad", currentPad);
                       closeModal();
                     }}
                   >

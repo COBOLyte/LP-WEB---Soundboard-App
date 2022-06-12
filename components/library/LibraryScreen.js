@@ -7,8 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import SampleCard from "./../SampleCard";
 import { filteredLibrarySelector, librarySelector, setFilter } from "./LibrarySlice";
-
-import { setPadSample } from "../sampler/SamplerSlice";
+import { setSample } from "../sampler/SamplerSlice";
 
 const LibraryScreen = () => {
   const dispatch = useDispatch();
@@ -38,7 +37,7 @@ const LibraryScreen = () => {
           (item.id !== sampleId) ? (
             <TouchableOpacity
               onPress={() => {
-                dispatch(setPadSample({ id: padId, sampleId: item.id }));
+                dispatch(setSample({ id: padId, sampleId: item.id, duration: item.duration }));
                 
                 navigation.goBack();
               }}

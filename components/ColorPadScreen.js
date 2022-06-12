@@ -3,9 +3,9 @@ import ColorPicker from 'react-native-wheel-color-picker'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
-import { changePadColor } from "./sampler/SamplerSlice";
+import { changeColor } from "./sampler/SamplerSlice";
 
-const PadColorPicker = () => {
+const ColorPadScreen = () => {
     const dispatch = useDispatch();
     const { id, color } = useRoute().params;
 
@@ -13,10 +13,10 @@ const PadColorPicker = () => {
         <SafeAreaView style={{ marginHorizontal: 50 }}>
             <ColorPicker
                 color={ color }
-                onColorChangeComplete={(color) => dispatch(changePadColor({ id: id, color: color }) )}
+                onColorChangeComplete={(color) => dispatch(changeColor({ id: id, color: color }) )}
             />
         </SafeAreaView>
     );
 };
 
-export default PadColorPicker;
+export default ColorPadScreen;

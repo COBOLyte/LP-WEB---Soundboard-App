@@ -8,19 +8,19 @@ import { persistStore } from 'redux-persist'
 import { PersistGate } from "redux-persist/integration/react";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
+import Store from "./Store";
 import SamplerScreen from "./components/sampler/SamplerScreen"
 import LibraryScreen from "./components/library/LibraryScreen"
-import PadColorPickerScreen from "./components/PadColorPickerScreen";
-import RecorderScreen from "./components/RecorderScreen";
-
-import Store from "./Store";
+import RecordScreen from "./components/RecordScreen";
 import DownloadScreen from "./components/DownloadScreen";
+import ColorPadScreen from "./components/ColorPadScreen";
+import CropSampleScreen from "./components/CropSampleScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 const Persistor = persistStore(Store);
 
-const Tabs = () => {
+const LibraryTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -47,7 +47,7 @@ const Tabs = () => {
       })}
     >
       <Tab.Screen name="Samples" component={ LibraryScreen } options={{ headerShown: false }} />
-      <Tab.Screen name="Record" component={ RecorderScreen } options={{ headerShown: false }} />
+      <Tab.Screen name="Record" component={ RecordScreen } options={{ headerShown: false }} />
       <Tab.Screen name="Download" component={ DownloadScreen } options={{ headerShown: false }} />
     </Tab.Navigator>
   );
@@ -58,26 +58,31 @@ const App = () => {
     <Provider store={ Store }>
       <StatusBar hidden />
       <PersistGate persistor={ Persistor }>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <Stack.Navigator>
-          <Stack.Screen
-            name="Sounboard App"
-            component={ SamplerScreen }
-            options={{ headerShown: false }}
-          />
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <Stack.Navigator>
             <Stack.Screen
-              name="Library"
-              component={ Tabs }
+              name="Sounboard App"
+              component={ SamplerScreen }
+              options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="Pad coloring"
-              component={ PadColorPickerScreen }
-              options={{ headerShown: true }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </SafeAreaProvider>
+              <Stack.Screen
+                name="Library"
+                component={ LibraryTabs }
+              />
+              <Stack.Screen
+                name="Crop Sample"
+                component={ CropSampleScreen }
+                options={{ headerShown: true }}
+              />
+              <Stack.Screen
+                name="Color Pad"
+                component={ ColorPadScreen }
+                options={{ headerShown: true }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </SafeAreaProvider>
       </PersistGate>
     </Provider>
   );

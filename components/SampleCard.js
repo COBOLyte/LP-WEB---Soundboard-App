@@ -6,15 +6,16 @@ import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { getDefaultSample } from "./getDefaultSample";
+import { getDefaultSample } from "./utils/getDefaultSample";
 import { addSample, removeSample } from "./library/LibrarySlice";
+import { clearPadBySampleId } from "./sampler/SamplerSlice";
 
 const SampleCard = ({ sample, isDownloadable, color = "#ffffff" }) => {
   const dispatch = useDispatch();
   const [sound, setSound] = useState();
 
   const playSound = async () => {
-    const {sound} = await Audio.Sound.createAsync(
+    const { sound } = await Audio.Sound.createAsync(
       (sample.type === "Default")
         ? getDefaultSample(sample.title)
         : { uri: sample.uri }
@@ -39,6 +40,7 @@ const SampleCard = ({ sample, isDownloadable, color = "#ffffff" }) => {
       dispatch(addSample({
         title: sample.title,
         uri: uri,
+        duration: sample.duration * 1000,
         type: "Freesound"
       }));
     })
@@ -49,6 +51,8 @@ const SampleCard = ({ sample, isDownloadable, color = "#ffffff" }) => {
     FileSystem.deleteAsync(sample.uri)
     .then(() => {
       dispatch(removeSample({ id: sample.id }));
+
+      dispatch(clearPadBySampleId({ sampleId: sample.id }))
     })
     .catch((error) => {});
   };
@@ -68,38 +72,38 @@ const SampleCard = ({ sample, isDownloadable, color = "#ffffff" }) => {
     return sound ? async () => await sound.unloadAsync() : undefined;
   }, [sound]);
 
-    return (
-      <SafeAreaView style={[ styles.container, { backgroundColor: color } ]}>
-        {(!sound) ? (
-          <TouchableOpacity onPress={ playSound }>
-            <Ionicons name={ 'play-circle-outline' } size={ 40 } />
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity onPress={ stopSound }>
-            <Ionicons name={ 'stop-circle-outline' } size={ 40 } />
-          </TouchableOpacity>
-        )}
-        <Text style={ styles.text }>{ sample.title.slice(0, 50) }</Text>
-        <Text>
-          { (isDownloadable) ? secondsToMinutes(sample.duration) : sample.type }
-        </Text>
-        {(isDownloadable) ? (
-          <TouchableOpacity onPress={ downloadSample }>
-            <Ionicons
-              name={ 'download-outline' }
-              size={ 25 }
-              color={ 'blue' }
-            />
-          </TouchableOpacity>
-        ) : (sample.type !== "Default") ? (
-          <TouchableOpacity onPress={ deleteSample }>
-            <Ionicons name={'trash'} size={ 25 } color={'red'} />
-          </TouchableOpacity>
-        ) : (
-          <SafeAreaView></SafeAreaView>
-        )}
-      </SafeAreaView>
-    );
+  return (
+    <SafeAreaView style={[ styles.container, { backgroundColor: color } ]}>
+      {(!sound) ? (
+        <TouchableOpacity onPress={ playSound }>
+          <Ionicons name={ 'play-circle-outline' } size={ 40 } />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity onPress={ stopSound }>
+          <Ionicons name={ 'stop-circle-outline' } size={ 40 } />
+        </TouchableOpacity>
+      )}
+      <Text style={ styles.text }>{ sample.title.slice(0, 50) }</Text>
+      <Text>
+        { (isDownloadable) ? secondsToMinutes(sample.duration) : sample.type }
+      </Text>
+      {(isDownloadable) ? (
+        <TouchableOpacity onPress={ downloadSample }>
+          <Ionicons
+            name={ 'download-outline' }
+            size={ 25 }
+            color={ 'blue' }
+          />
+        </TouchableOpacity>
+      ) : (sample.type !== "Default") ? (
+        <TouchableOpacity onPress={ deleteSample }>
+          <Ionicons name={'trash'} size={ 25 } color={'red'} />
+        </TouchableOpacity>
+      ) : (
+        <SafeAreaView></SafeAreaView>
+      )}
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({

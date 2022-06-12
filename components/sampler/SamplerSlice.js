@@ -5,11 +5,11 @@ const SamplerSlice = createSlice({
   initialState: { pads: Array.from(
     { length: 18 },
     (elm, index) => {
-      return { id: index, sampleId: null, color: '#ffffff' };
+      return { id: index, sampleId: null, color: '#ffffff', startPosition: 0, endPosition: undefined };
     }
   ) },
   reducers: {
-    setPadSample:  (state, action) => {
+    setSample:  (state, action) => {
       return {
         ...state,
         pads: state.pads.map((elm) => 
@@ -17,12 +17,14 @@ const SamplerSlice = createSlice({
           ? {
               ...elm,
               sampleId: action.payload.sampleId,
+              startPosition: 0,
+              endPosition: action.payload.duration,
               color: (elm.color !== "#ffffff") ? elm.color : "#000000" 
             }
           : elm
         )};
     },
-    clearPadSample:  (state, action) => {
+    clearSample: (state, action) => {
       return {
         ...state,
         pads: state.pads.map((elm) => 
@@ -30,12 +32,14 @@ const SamplerSlice = createSlice({
           ? {
               ...elm,
               sampleId: null,
+              startPosition: 0,
+              endPosition: undefined,
               color: "#ffffff"
             }
           : elm
         )};
     },
-    changePadColor: (state, action) => {
+    changeColor: (state, action) => {
       return {
         ...state,
         pads: state.pads.map((elm) =>
@@ -44,7 +48,36 @@ const SamplerSlice = createSlice({
           : elm
         )
       };
-    }
+    },
+    setPositions: (state, action) => {
+      return {
+        ...state,
+        pads: state.pads.map((elm) =>
+          (elm.id === action.payload.id)
+          ? {
+              ...elm,
+              startPosition: action.payload.startPosition,
+              endPosition: action.payload.endPosition
+            }
+          : elm
+        )
+      };
+    },
+    clearPadBySampleId: (state, action) => {
+      return {
+        ...state,
+        pads: state.pads.map((elm) => 
+          (elm.sampleId === action.payload.sampleId)
+          ? {
+              ...elm,
+              sampleId: null,
+              startPosition: 0,
+              endPosition: null,
+              color: "#ffffff"
+            }
+          : elm
+        )};
+    },
 /*     clearPads: (state, action) => {
       return {
         ...state,
@@ -58,7 +91,7 @@ const SamplerSlice = createSlice({
   }
 });
 
-export const { setPadSample, changePadColor, clearPadSample } = SamplerSlice.actions;
+export const { setSample, changeColor, clearSample, setPositions, clearPadBySampleId } = SamplerSlice.actions;
 
 export const samplerSelector = (state) => state.sampler;
 

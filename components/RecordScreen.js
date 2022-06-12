@@ -41,9 +41,12 @@ const Recorder = () => {
     await recording.stopAndUnloadAsync();
     setRecording(undefined);
 
+    const recordingStatus = await recording.getStatusAsync();
+    
     dispatch(addSample({
         title: title,
         uri: recording.getURI(),
+        duration: recordingStatus.durationMillis,
         type: "Record"
     }));
 
