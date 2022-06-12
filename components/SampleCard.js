@@ -20,6 +20,10 @@ const SampleCard = ({ sample, isDownloadable, color = "#ffffff" }) => {
         ? getDefaultSample(sample.title)
         : { uri: sample.uri }
     );
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish) setSound(null);
+      });
+
     setSound(sound);
 
     await sound.playAsync();
