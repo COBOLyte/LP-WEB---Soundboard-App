@@ -1,4 +1,4 @@
-# Soundboard-App
+# Soundboard App
 
 A simplified virtual sampler app made with React Native.
 
