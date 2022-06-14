@@ -61,6 +61,7 @@ const CropSampleScreen = () => {
           totalDuration={ sample.duration }
           initialZoomValue={ 1 }
           centerOnLayout={ false }
+          tintColor="#191919"
           scaleInOnInit
         />
       </SafeAreaView>
@@ -80,12 +81,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: "#323232"
   },
   button: {
     alignSelf: 'center',
     marginTop: 20
   },
-  buttonText: { fontSize: 40 }
+  buttonText: {
+    fontSize: 30,
+    color: "#20b2aa",
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: "#20b2aa",
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+  }
 });
 
 export default CropSampleScreen;

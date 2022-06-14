@@ -42,8 +42,11 @@ const LibraryTabs = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'black',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: "#40e0d0",
+        tabBarInactiveTintColor: "#808080",
+        tabBarStyle: {
+          backgroundColor: "#191919"
+        }
       })}
     >
       <Tab.Screen name="Samples" component={ LibraryScreen } options={{ headerShown: false }} />
@@ -69,16 +72,43 @@ const App = () => {
               <Stack.Screen
                 name="Library"
                 component={ LibraryTabs }
+                options={{
+                  headerStyle: {
+                    backgroundColor: "#191919",
+                  },
+                  headerTitleStyle: {
+                    color: "#ffffff"
+                  },
+                  headerTintColor: "#40e0d0"
+                }}
               />
               <Stack.Screen
                 name="Crop Sample"
                 component={ CropSampleScreen }
-                options={{ headerShown: true }}
+                options={{
+                  headerShown: true,
+                  headerStyle: {
+                    backgroundColor: "#191919",
+                  },
+                  headerTitleStyle: {
+                    color: "#ffffff"
+                  },
+                  headerTintColor: "#40e0d0"
+                }}
               />
               <Stack.Screen
                 name="Color Pad"
                 component={ ColorPadScreen }
-                options={{ headerShown: true }}
+                options={{
+                  headerShown: true,
+                  headerStyle: {
+                    backgroundColor: "#191919",
+                  },
+                  headerTitleStyle: {
+                    color: "#ffffff"
+                  },
+                  headerTintColor: "#40e0d0"
+                }}
               />
             </Stack.Navigator>
           </NavigationContainer>

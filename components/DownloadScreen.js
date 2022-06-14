@@ -43,7 +43,7 @@ const DownloadScreen = () => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={ styles.container }>
       <SafeAreaView>
         <TextInput
           defaultValue={ term }
@@ -52,7 +52,7 @@ const DownloadScreen = () => {
           onSubmitEditing={ fetchResults }
           style={ styles.searchInput }
         />
-        <Button title="Search" onPress={ fetchResults } color="grey" />
+        <Button title="Search" onPress={ fetchResults } color="#20b2aa" />
       </SafeAreaView>
       <FlatList
         style={ styles.list }
@@ -72,11 +72,14 @@ const DownloadScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  list: { marginBottom: 85 },
+  container: {
+    backgroundColor: "#323232",
+    flex: 1
+  },
   searchInput: {
     paddingStart: 10,
     height: 50,
-    backgroundColor: 'white'
+    backgroundColor: '#ffffff'
   }
 });
 

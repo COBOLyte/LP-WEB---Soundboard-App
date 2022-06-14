@@ -89,7 +89,7 @@ const Recorder = () => {
             </TouchableOpacity>
           ) : (
             <TouchableOpacity onPress={ stopRecording }>
-              <Ionicons name={ 'stop-circle-outline' } size={ 60 } />
+              <Ionicons name={ 'stop-circle-outline' } size={ 60 } color={ "#ffffff" } />
             </TouchableOpacity>
           )}
         </SafeAreaView>
@@ -99,43 +99,44 @@ const Recorder = () => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 10,
-      alignItems: 'center',
-      marginTop: 20
-    },
-    title: {
-      textAlign: 'center',
-      paddingVertical: 10,
-      paddingHorizontal: 50,
-      borderWidth: 1,
-      borderRadius: 5,
-      marginBottom: 20
-    },
-    sectionStyle: {
-      flex: 1,
-      marginTop: 32,
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    disabledRecordBtn: {
-      color: '#808080',
-      opacity: 0.50,
-    }
-  });
+  container: {
+    flex: 1,
+    padding: 10,
+    alignItems: 'center',
+    backgroundColor: "#323232"
+  },
+  title: {
+    textAlign: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 50,
+    borderWidth: 2,
+    borderRadius: 5,
+    marginBottom: 20,
+    borderColor: "#000000",
+    backgroundColor: "#ffffff"
+  },
+  sectionStyle: {
+    flex: 1,
+    marginTop: 30,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  disabledRecordBtn: {
+    color: '#808080',
+    opacity: 0.50,
+  }
+});
   
-  const options = {
-    container: {
-      width: 200,
-      marginTop: -20,
-      alignItems: 'center'
-    },
-    text: {
-      fontSize: 25,
-      color: '#000000',
-      marginLeft: 7
-    },
-  };
+const options = {
+  container: {
+    width: 200,
+    alignItems: 'center'
+  },
+  text: {
+    fontSize: 30,
+    color: '#20b2aa',
+    textAlign: 'center'
+  },
+};
 
 export default Recorder;

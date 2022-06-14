@@ -5,7 +5,7 @@ const SamplerSlice = createSlice({
   initialState: { pads: Array.from(
     { length: 18 },
     (elm, index) => {
-      return { id: index, sampleId: null, color: '#ffffff', startPosition: 0, endPosition: undefined };
+      return { id: index, sampleId: null, color: '#000000', startPosition: 0, endPosition: undefined };
     }
   ) },
   reducers: {
@@ -19,7 +19,7 @@ const SamplerSlice = createSlice({
               sampleId: action.payload.sampleId,
               startPosition: 0,
               endPosition: action.payload.duration,
-              color: (elm.color !== "#ffffff") ? elm.color : "#000000" 
+              color: (elm.color !== "#000000") ? elm.color : "#ffffff" 
             }
           : elm
         )};
@@ -34,7 +34,7 @@ const SamplerSlice = createSlice({
               sampleId: null,
               startPosition: 0,
               endPosition: undefined,
-              color: "#ffffff"
+              color: "#000000"
             }
           : elm
         )};
@@ -73,7 +73,7 @@ const SamplerSlice = createSlice({
               sampleId: null,
               startPosition: 0,
               endPosition: null,
-              color: "#ffffff"
+              color: "#000000"
             }
           : elm
         )};
@@ -83,7 +83,7 @@ const SamplerSlice = createSlice({
         ...state,
         pads: state.pads.map((elm) =>
           (elm.sampleId || elm.color)
-          ? { ...elm, sampleId: null, color: "#ffffff" }
+          ? { ...elm, sampleId: null, color: "#000000" }
           : elm
         )
       };

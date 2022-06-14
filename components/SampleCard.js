@@ -10,7 +10,7 @@ import { getDefaultSample } from "./utils/getDefaultSample";
 import { addSample, removeSample } from "./library/LibrarySlice";
 import { clearPadBySampleId } from "./sampler/SamplerSlice";
 
-const SampleCard = ({ sample, isDownloadable, color = "#ffffff" }) => {
+const SampleCard = ({ sample, isDownloadable, color = "#191919" }) => {
   const dispatch = useDispatch();
   const [sound, setSound] = useState();
 
@@ -80,15 +80,15 @@ const SampleCard = ({ sample, isDownloadable, color = "#ffffff" }) => {
     <SafeAreaView style={[ styles.container, { backgroundColor: color } ]}>
       {(!sound) ? (
         <TouchableOpacity onPress={ playSound }>
-          <Ionicons name={ 'play-circle-outline' } size={ 40 } />
+          <Ionicons name={ 'play-circle-outline' } size={ 40 } color={ '#ffffff' } />
         </TouchableOpacity>
       ) : (
         <TouchableOpacity onPress={ stopSound }>
-          <Ionicons name={ 'stop-circle-outline' } size={ 40 } />
+          <Ionicons name={ 'stop-circle-outline' } size={ 40 } color={ '#ffffff' } />
         </TouchableOpacity>
       )}
       <Text style={ styles.text }>{ sample.title.slice(0, 50) }</Text>
-      <Text>
+      <Text style={ styles.subText }>
         { (isDownloadable) ? secondsToMinutes(sample.duration) : sample.type }
       </Text>
       {(isDownloadable) ? (
@@ -96,12 +96,12 @@ const SampleCard = ({ sample, isDownloadable, color = "#ffffff" }) => {
           <Ionicons
             name={ 'download-outline' }
             size={ 25 }
-            color={ 'blue' }
+            color={ '#3d76e0' }
           />
         </TouchableOpacity>
       ) : (sample.type !== "Default") ? (
         <TouchableOpacity onPress={ deleteSample }>
-          <Ionicons name={'trash'} size={ 25 } color={'red'} />
+          <Ionicons name={'trash'} size={ 25 } color={ "#b22222" } />
         </TouchableOpacity>
       ) : (
         <SafeAreaView></SafeAreaView>
@@ -117,12 +117,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     margin: 5,
     padding: 5,
-    borderRadius: 5
+    borderRadius: 5,
+    borderWidth: 2,
   },
   text: {
     fontWeight: "bold",
-    fontSize: 18
-  }
+    fontSize: 18,
+    color: "#ffffff"
+  },
+  subText: { color: "#ffffff" }
 });
 
 export default SampleCard;

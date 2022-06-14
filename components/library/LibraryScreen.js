@@ -18,8 +18,8 @@ const LibraryScreen = () => {
   const selectableTypes = ["All", "Default", "Freesound", "Record"];
 
   return (
-    <SafeAreaView>
-      <SafeAreaView style={ styles.container }>
+    <SafeAreaView style={ styles.container }>
+      <SafeAreaView style={ styles.filter }>
         <Picker
           style={ styles.typePicker }
           selectedValue={ filter }
@@ -47,7 +47,7 @@ const LibraryScreen = () => {
           ) : (
             <SampleCard
               sample={ item }
-              color={ '#d3d3d3' }
+              color={ '#20b2aa' }
             />
           )
         )}
@@ -59,20 +59,26 @@ const LibraryScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: "#323232"
+  },
+  filter: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#ffffff"
+    backgroundColor: "#323232",
+    borderBottomWidth: 1.5
   },
   typePicker: {
     width: "25%",
-    height: 50
+    height: 50,
+    backgroundColor: '#323232',
+    color: "#ffffff"
   },
   addButton: {
     flexDirection: "row",
     alignItems: "center"
-  },
-  list: { marginBottom: 55 }
+  }
 });
 
 export default LibraryScreen;

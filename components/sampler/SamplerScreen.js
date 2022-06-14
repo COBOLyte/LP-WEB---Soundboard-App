@@ -24,15 +24,17 @@ const SamplerScreen = () => {
 
   return (
     <SafeAreaView style={ styles.container }>
-      { pads.map((item) => {
-        return (
-          <Pad
-            key={ item.id }
-            padData={ item }
-            handleLongPress={() => openModal(item.id)}
-          />
-        );
-      }) }
+      <SafeAreaView style={ styles.pads }>
+        { pads.map((item) => {
+          return (
+            <Pad
+              key={ item.id }
+              padData={ item }
+              handleLongPress={() => openModal(item.id)}
+            />
+          );
+        }) }
+      </SafeAreaView>
 
       <SafeAreaView style={ styles.centeredView }>
           <Modal
@@ -118,8 +120,14 @@ const SamplerScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: "#323232"
+  },
+  pads: {
     flexDirection: "row",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    justifyContent: "center",
+    marginTop: 20,
   },
   centeredView: {
     flex: 1,
@@ -128,7 +136,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     marginTop: -70,
-    backgroundColor: "white",
+    backgroundColor: "#323232",
     paddingHorizontal: 40,
     paddingVertical: 25,
     shadowColor: "#000",
@@ -143,7 +151,7 @@ const styles = StyleSheet.create({
   modalButton: { marginVertical: 10 },
   modalButtonText: {
     fontSize: 15,
-    textAlign: "center"
+    color: "#ffffff"
   }
 });
 
