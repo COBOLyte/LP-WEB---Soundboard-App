@@ -93,7 +93,7 @@ const SamplerScreen = () => {
                   <TouchableOpacity
                     style={ styles.modalButton }
                     onPress={() => {
-                      navigation.navigate("Color Pad", currentPad);
+                      navigation.navigate("Color", currentPad);
                       closeModal();
                     }}
                   >

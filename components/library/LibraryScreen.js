@@ -22,6 +22,7 @@ const LibraryScreen = () => {
       <SafeAreaView style={ styles.filter }>
         <Picker
           style={ styles.typePicker }
+          dropdownIconColor={ "#ffffff" }
           selectedValue={ filter }
           onValueChange={(filter) => dispatch(setFilter({ filter }) )}
         >
@@ -47,7 +48,7 @@ const LibraryScreen = () => {
           ) : (
             <SampleCard
               sample={ item }
-              color={ '#20b2aa' }
+              color={ '#008B8B' }
             />
           )
         )}

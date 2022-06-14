@@ -112,6 +112,7 @@ const SampleCard = ({ sample, isDownloadable, color = "#191919" }) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

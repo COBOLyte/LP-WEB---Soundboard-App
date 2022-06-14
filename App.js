@@ -97,7 +97,7 @@ const App = () => {
                 }}
               />
               <Stack.Screen
-                name="Color Pad"
+                name="Color"
                 component={ ColorPadScreen }
                 options={{
                   headerShown: true,

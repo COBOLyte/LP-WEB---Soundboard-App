@@ -52,7 +52,7 @@ const DownloadScreen = () => {
           onSubmitEditing={ fetchResults }
           style={ styles.searchInput }
         />
-        <Button title="Search" onPress={ fetchResults } color="#20b2aa" />
+        <Button title="Search" onPress={ fetchResults } color="#008080" />
       </SafeAreaView>
       <FlatList
         style={ styles.list }
